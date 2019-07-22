@@ -1,6 +1,6 @@
 #!/usr/bin/bash python3
 from copy import copy
-
+import asyncio
 class Stack(object):
     def __init__(self, max_size = 2046):
         self._stack_list = []
@@ -50,28 +50,33 @@ class Stack(object):
           
         return is_success
 
-    async def _reverse_stack(self, reverse_stack = None):
+    async def _reverse_stack(self, reverse_stack = None, reverse_way = False):
         """
          将栈逆置（不可恢复性操作）
          Args:
               reverse_stack:
+              reverse_way:
 
          Returns:
               boolean
         """
-        
-        _stack = copy(self._stack_list)
-        try:
-            while (len(_stack)):
-                reverse_stack.extend([_stack.pop()])
-
-            self._stack_list = reverse_stack
+        if reverse_way:
+            self._stack_list = reversed(self._stack_list)
             is_success = True
-        except Exception:
-            is_success = False
-        
+        else:
+            _stack = copy(self._stack_list)
+            try:
+                while (len(_stack)):
+                    reverse_stack.extend([_stack.pop()])
+            
+                self._stack_list = reverse_stack
+                is_success = True
+            except Exception:
+                is_success = False
+    
         return is_success
 
-    async def reverse_stack(self):
-        return await self._reverse_stack([])
+    async def reverse_stack(self, reverse_way = False):
+        return await self._reverse_stack([], reverse_way = False)
+
 
