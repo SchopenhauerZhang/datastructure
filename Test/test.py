@@ -34,4 +34,3 @@ def queue():
 	print(que.maxsize)
 
 
-queue()
