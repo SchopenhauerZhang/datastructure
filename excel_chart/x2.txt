@@ -1,0 +1,13 @@
+guangzhou 4.5
+
+hefei 2.6
+
+beijing 1.3
+
+shenzhen 8.5
+
+changsha 0.8
+
+chengdu 2.0
+
+lanzhou 2.4

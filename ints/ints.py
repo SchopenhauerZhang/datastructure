@@ -25,3 +25,15 @@ class Ints(object):
                 count +=1
 
         return count
+
+    def get_reverse(self,int1:int=0)->int:
+        """
+        翻转整数
+        """
+        res_int = 0
+        while int1:
+            res_int,int1 = res_int*10+int1%10,int1//10
+
+        return res_int
+
+

@@ -97,7 +97,7 @@ class Strings(object):
         """
         return words[::-1]
 
-    def str_to_digit(self,strs:str='')->int:
+    def get_str_to_digit(self,strs:str='')->int:
         """
         将字符串转为数字
         """
@@ -112,6 +112,91 @@ class Strings(object):
                 break
 
         return res
+    
+    def get_first_pos_from_str(self,str1:str='',character:str='')->int:
+        """
+        找到字符在字符串中第一次出现的位置【不使用字典】
+        """
+        res_pos = -1
+        for index,value in enumerate(str1):
+            if value.lower() == character.lower():
+                res_pos = index
+                break
+        
+        return res_pos
+
+    def get_product_from_two_strs(self,str1:str='0',str2:str='0')->str:
+        """
+        有两个字符串，str1,str2，内容为数值，数值均大于0请编写算法计算两个字符串相乘的结果，不可以使用大数据类型，不可以把字符串直接转成整数来处理
+        """
+        itera_str1 = str1
+        itera_str2 = str2
+        sign = 0
+        res_str3 = ''
+        for i in range(len(itera_str1),0,-1):
+            for j in range(len(itera_str2),0,-1): 
+                product = int(float(i))*int(float(j))+sign
+                product,sign = product%10,product//10
+                res_str3 = str(product) + res_str3
+        
+        if sign:
+            res_str3 = str(sign) + res_str3
+        
+        return res_str3
+
+    def get_sum_from_two_strs(self,str1:str='0',str2:str='0')->str:
+        """
+        有两个字符串，str1,str2，内容为数值，数值均大于0请编写算法计算两个字符串相加的结果，不可以使用大数据类型，不可以把字符串直接转成整数来处理
+        """
+        itera_str1 = str1
+        itera_str2 = str2
+        max_len = max(len(itera_str1),len(itera_str2))
+
+        while max_len!= len(itera_str1) or max_len!= len(itera_str2):
+            if max_len!= len(itera_str1):
+                itera_str1 = '0'+itera_str1
+            elif max_len!= len(itera_str2):
+                itera_str2 = '0'+itera_str2
+
+        sign = 0
+        res_str3 = ''
+        for i in range(len(itera_str1)-1,-1,-1):
+            product = int(float(itera_str1[i]))+int(float(itera_str2[i]))+sign
+            product,sign = product%10,product//10
+            res_str3 = str(product) + res_str3
+        
+        if sign:
+            res_str3 = str(sign) + res_str3
+        
+        return res_str3
+
+    def get_words_from_strs(self,string:str='')->list:
+        """
+        从字符串里提取单词，例如”this is a book“，将单词放到列表里，要求是不能使用split函数
+        """
+        res_list = []
+        word = ''
+        for i in string:
+            if i.strip():
+                word += i
+            elif word.strip():
+                res_list.append(word)
+                word = ''
+
+        if word.strip():
+            res_list.append(word)
+
+        return res_list
+
+
+
+
+
+
+
+
+
+
 
 
 

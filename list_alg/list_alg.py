@@ -1,3 +1,8 @@
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class ListAlg(object):
     """
@@ -134,7 +139,120 @@ class ListAlg(object):
                 return [res.get(target-value),index]
             res[value] = index
 
+    def get_add_two_listNode(self,l1: ListNode, l2: ListNode,is_better:bool=True) -> ListNode:
+        """
+        给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+        link:https://leetcode-cn.com/submissions/detail/39510474/
+        eg:
+            (2 -> 4 -> 3) + (5 -> 6 -> 4)=7 -> 0 -> 8
+        """
+        res = None
+        if is_better:
+            res = self._get_add_two_listNode_bettter(l1,l2)
+        else:
+            res= self._get_add_two_listNode(l1,l2)
+        
+        return res
 
+    def _get_add_two_listNode(self,l1: ListNode, l2: ListNode)->ListNode:    
+        """
+        还有待进步
+        """
+        sign = 0
+        sum_node = None
+        head_node = sum_node
+        while l1 and l2:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+            sum_ = val1 + val2 + sign
+            if sum_ >= 10:
+                sign = sum_ //10
+                sum_ = sum_ % 10
+            else:
+                sign = 0
+            if sum_node is None:
+                sum_node = ListNode(sum_)
+                head_node = sum_node
+            else:
+                sum_node.next = ListNode(sum_)
+                sum_node = sum_node.next
+            l1 = l1.next
+            l2 = l2.next
+        
+        if l1:
+            while l1:
+                sum_ = l1.val+sign
+                if sum_ >= 10:
+                    sign = sum_ //10
+                    sum_ = sum_ % 10
+                else:
+                    sign = 0
+                sum_node.next = ListNode(sum_)
+                sum_node = sum_node.next
+                l1 = l1.next
+        elif l2:
+            while l2:
+                sum_ = l2.val+sign
+                if sum_ >= 10:
+                    sign = sum_ //10
+                    sum_ = sum_ % 10
+                else:
+                    sign = 0
+                sum_node.next = ListNode(sum_)
+                sum_node = sum_node.next
+                l2 = l2.next
+        if sign:
+            sum_node.next = ListNode(sign)
+            sum_node = sum_node.next
+
+        return head_node
+
+    def _get_add_two_listNode_bettter(self,l1: ListNode, l2: ListNode)->ListNode:
+        """
+        优雅
+        """
+        a,b,p,carry = l1, l2, None,0
+        while a or b:
+            val = (a.val if a else 0)+(b.val if b else 0)+carry
+            carry,val = val//10 if val>=10 else 0,val%10
+            p,p.val = a if a else b,val
+            a,b = a.next if a else None,b.next if b else None
+            p.next = a if a else b
+        
+        if carry:
+            p.next = ListNode(carry)
+            
+        return l1
+
+    def find_miss_number(self)->int:
+        """
+        有一组数字，从1到n，中减少了一个数，顺序也被打乱，放在一个n-1的数组里，请找出丢失的数字
+        """
+        lst = self.lst
+        for i in range(1,len(lst)+1):
+            if i not in lst:
+                return i
+
+    def delete_repeat_from_list(self,is_del:bool=True)->list:
+        """
+        删除有序自增列表中的重复元素，只能使用 O(1) 额外空间来完成这个任务
+        """
+        lst = self.lst
+        sentinel = 0
+        for i in lst:
+            if i != lst[sentinel]:
+                lst[sentinel+1] = i
+                sentinel += 1
+        len_lst = len(lst)
+        for i in range(len_lst)
+
+        return lst
+
+print(ListAlg([1,2,3,3,4,4,5,5]).delete_repeat_from_list())
+
+
+    
+#print(ListAlg().get_add_two_listNode(ListNode(1,ListNode(2,)),ListNode()))
 
 
 
