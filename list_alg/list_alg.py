@@ -8,7 +8,7 @@ class ListAlg(object):
     """
     list相关算法
     """
-    def __init__(self,l:list):
+    def __init__(self,l:list=[]):
         self.lst = l
 
     def reverse(self)->list:
@@ -243,16 +243,44 @@ class ListAlg(object):
             if i != lst[sentinel]:
                 lst[sentinel+1] = i
                 sentinel += 1
-        len_lst = len(lst)
-        for i in range(len_lst)
 
         return lst
 
-print(ListAlg([1,2,3,3,4,4,5,5]).delete_repeat_from_list())
+    def get_combination_from_list(self,sum_number:int=0)->set:
+        """
+        已知一个无重复元素的序列,给定一个目标数,找出序列中所有可以使数字和未目标数的组合。
+        eg:
+            例如序列 [2, 3, 5]， 目标值为8， 最终的组合有
+                (2, 3, 3)
+                (3, 5)
+                (2, 2, 2, 2)
+        """
+        res_set = set()
+        for i in self._get_combination_from_list(sum_number):
+            i.sort()
+            res_set.add(tuple(i))
+        
+        return res_set
 
+    def _get_combination_from_list(self,sum_number:int=0)->list:
+        """
+        获取序列中所有满足条件的组合,存在重复序列
+        """
+        lst = self.lst
+        res_list = []
+        for i in lst:
+            if sum_number == i:
+                res_list.append([i])
+                break
+            elif sum_number < i:
+                continue
+            else:
+                x = self._get_combination_from_list(sum_number-i)
+                for j in x:
+                    j.append(i)
+                res_list.extend(x)
 
-    
-#print(ListAlg().get_add_two_listNode(ListNode(1,ListNode(2,)),ListNode()))
-
+        return res_list
+        
 
 
