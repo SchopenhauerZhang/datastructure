@@ -187,26 +187,66 @@ class Strings(object):
             res_list.append(word)
 
         return res_list
+    
+    def get_num_sequence(self,string:str='',son_string:str='',is_return_list:bool=True,is_strict:bool=True)->int:
+        """
+        给定一个字符串S和一个字符串T，计算S的子序列中T出现的次数。
+        """
+        set_string = self._set_get_pos_by_son_string_from_string(string)
+        list_son_string_sequence = self._itera_get_son_string_sequence_from_string(set_string,son_string,0,len(string))
+        # 剔除不符合规范的子串（比如顺序倒置）
+        if is_strict:
+            for index,_list_son_string in enumerate(list_son_string_sequence):
+                is_strict = True
+                pre_character = _list_son_string[0]
+                for i in _list_son_string:
+                    if pre_character < i:
+                        is_strict = False
+                        break
+                    else:
+                        pre_character = i
+                if not is_strict:
+                    del list_son_string_sequence[index]
 
+        return len(list_son_string_sequence) if not  is_return_list else list_son_string_sequence
 
+    def _itera_get_son_string_sequence_from_string(self,set_character_pos:set='',son_string:str='',start_pos:int=0,end_pos:int=-1)->list:
+        """
+        从长串中迭代获取子串序列，获取到所有可能的结果
+        """
+        list_character_pos_by_son_string_from_set_character_pos = []
 
+        if start_pos < len(son_string):
+            character = son_string[start_pos]
 
+            if character in set_character_pos:
 
+                for character_pos in set_character_pos[character]:
+                    if character_pos < start_pos:
+                        continue
+                    if character == son_string[len(son_string)-1]:
+                        list_character_pos_by_son_string_from_set_character_pos.append([character_pos])
+                    else:
+                        list_character_pos = self._itera_get_son_string_sequence_from_string(set_character_pos,son_string,start_pos+1,end_pos)                     
+                        for pos in list_character_pos:
+                            pos.append(character_pos)
 
+                        list_character_pos_by_son_string_from_set_character_pos.extend(list_character_pos)
 
+        return list_character_pos_by_son_string_from_set_character_pos
+    
+    def _set_get_pos_by_son_string_from_string(self,string:str='')->set:
+        """
+        将字符串转为集合
+        """
+        set_from_string_res = {}
+        for index,value in enumerate(string):
+            if value in set_from_string_res:
+                set_from_string_res[value].append(index)
+            else:
+                set_from_string_res[value] = [index]
 
-
-
-
-
-
-
-
-
-
-
-
-
+        return set_from_string_res
 
 
             
