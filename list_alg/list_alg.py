@@ -282,6 +282,65 @@ class ListAlg(object):
 
         return res_list
     
+    def find_max_common_characters(self)->set:
+        """
+        找到list中元素的公共字符
+        """
+        list_strings = self.lst
+        set_common_prefix = set(list_strings[0])
+        for i in list_strings:
+            set_common_prefix = set_common_prefix.intersection(set(i))
+
+        return set_common_prefix
     
+    def find_max_common_prefix(self)->str:
+        """
+        寻找最长公共前缀
+        """
+        list_strings = self.lst
+        max_common_prefix = list_strings[0].lower()
+        for string in list_strings:
+            string = string.lower() 
+            if string == max_common_prefix:
+                continue
+            else:
+                pos = 0
+                while len(max_common_prefix) - pos:
+                    if max_common_prefix[pos] != string[pos]:
+                        break
+                    pos += 1
+                
+                max_common_prefix = max_common_prefix[:pos]
 
+        return max_common_prefix   
 
+    def find_max_sum_from_lst(self):
+        """
+        一个列表里，都是整数，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+        """
+        lst = self.lst
+        last_max_sum = lst[0]
+        current_max_sum = 0
+        
+        for value in lst:
+            current_max_sum = current_max_sum+value if current_max_sum >= 0 else value
+            last_max_sum = current_max_sum if current_max_sum >= last_max_sum else last_max_sum
+
+        return last_max_sum 
+
+    def get_water_pool_size(self):
+        """
+        给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水
+        """
+        lst = self.lst
+        pool_size = 0
+        
+        for current_index,current_value in enumerate(lst):
+            if current_index == 0 or current_index == len(lst)-1:
+                pass
+            else:
+                min_mark_size = min (max(lst[:current_index]) , max(lst[current_index:]))
+                if current_value < min_mark_size:
+                    pool_size += (min_mark_size - current_value)
+            
+        return pool_size
