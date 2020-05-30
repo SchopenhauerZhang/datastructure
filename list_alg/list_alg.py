@@ -344,3 +344,25 @@ class ListAlg(object):
                     pool_size += (min_mark_size - current_value)
             
         return pool_size
+
+    def decrypt(self,n,k,num):
+        """
+        小明和安琪是好朋友，最近，他们的谈话被一家侦探公司监控，所以他们想将他们的谈话内容进行加密处理。
+        于是，他们发明了一种新的加密方式，每条信息都被编译成二进制数B(明文)，其长度为N，每次向右移动0,1,...,K-1位。
+        然后对每一列进行异或操作，并且把最终所得的结果记录下来。
+        例如：B=1001010,K=4
+        n=7
+        k=4
+        num=[1,1,1,0,1,0,0,1,1,0]
+
+        return:[1,0,0,1,0,1,0]
+        """
+        encrypt = num
+        res = [0 for i in range(n+k-1)]
+        for i in range(n+k-1):
+            res[i] = encrypt[i]
+            for j in range(max(0,i-k+1),i):
+                res[i] ^= res[j]
+
+        return res[:n]
+
