@@ -110,3 +110,95 @@ class Solution:
         return res_str
 #print(Solution().longestCommon(["flower","flow","flight"]))
 #print(Solution().longestCommon(["ca","a"]))
+
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """“”“
+        示例 1:
+
+        输入: "abcabcbb"
+        输出: 3 
+        解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+        ”“”"""
+        if len(s) <= 1:
+            return len(s)
+        window = dict()
+        window_left = 0
+        window_right = 0
+        res_len = 0
+
+        while window_right < len(s):
+            c = s[window_right]
+            window_right += 1
+
+            if c in window:
+                window[c] += 1
+            else:
+                window[c] = 1
+       
+
+            while window[c] > 1:
+                x = s[window_left]
+                
+                window[x] -=1
+                window_left += 1
+
+            res_len = max(res_len,(window_right -window_left))
+
+        return res_len
+#print(Solution().lengthOfLongestSubstring("pwwkew"))
+
+    def lengthOfLongestSubstring_offer(self, s: str) -> int:
+        dic = {}
+        max_length = 0
+        cur_length = 0
+        for i in range(len(s)):
+            if s[i] not in dic or i - dic[s[i]] > cur_length:
+                cur_length += 1
+            else:
+                cur_length = i - dic[s[i]]
+            dic[s[i]] = i
+            if max_length < cur_length:
+                max_length = cur_length
+        return max_length
+
+#print(Solution().lengthOfLongestSubstring_offer("pwwkew"))
+
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        """
+        给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
+
+        示例 1:
+
+        输入：text1 = "abcde", text2 = "ace" 
+        输出：3  
+        解释：最长公共子序列是 "ace"，它的长度为 3。
+        """
+        if text1 is None or text2 is None:
+            return 0
+        if len(text1) <= 0 or len(text2) <= 0:
+            return 0
+
+        return len(set(text1)&set(text2))
+#print(Solution().longestCommonSubsequence_sort("abcde","ace"))
+
+    def longestCommonSubsequence_sort(self, text1: str, text2: str) -> int:
+        """
+        给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
+
+        一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
+        例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。
+
+        若这两个字符串没有公共子序列，则返回 0。
+
+        
+
+        示例 1:
+
+        输入：text1 = "abcde", text2 = "ace" 
+        输出：3  
+        解释：最长公共子序列是 "ace"，它的长度为 3。
+        """
+
+
+
+print(Solution().longestCommonSubsequence_sort("abcde","ace"))
