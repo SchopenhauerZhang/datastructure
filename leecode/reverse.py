@@ -35,5 +35,5 @@ class Solution:
             res = res*10 + tmp
         result = negative_flag*res
         return result if -2**31 < result < 2**31-1 else 0
-        
-print(Solution().reverse(1534236469))
+
+#print(Solution().reverse(1534236469))
