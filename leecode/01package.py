@@ -262,7 +262,6 @@ class Solution:
                 if dp[idx]:
                     dp[idx + coin] += dp[idx]
                     
-        
         return dp[-1]
 
 print(Solution().Change_better([1, 2, 5],5))
