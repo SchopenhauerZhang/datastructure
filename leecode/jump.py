@@ -45,7 +45,7 @@ class Solution:
         
         return dp(0,nums)
 #print(Solution()._jump([7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]))
-    #https://leetcode-cn.com/problems/jump-game-ii/submissions/
+    
     def _jump_tanxin(self, nums: list) -> int:
         if len(nums) <= 1:
             return 0
@@ -54,27 +54,24 @@ class Solution:
         max_steps = 0
         j_step = 0
         x = 0
-        for i in range(len(nums)):
+        for i in range(len(nums)-1):
             max_steps = max(nums[i]+i,max_steps)
             if x == i:
                 j_step += 1
                 x = max_steps
 
         return j_step
-        
-        # int n = nums.size();
-        # int end = 0, farthest = 0;
-        # int jumps = 0;
-        # for (int i = 0; i < n - 1; i++) {
-        #     farthest = max(nums[i] + i, farthest);
-        #     if (end == i) {
-        #         jumps++;
-        #         end = farthest;
-        #     }
-        # }
-        # return jumps;
+# print(Solution()._jump_tanxin([7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]))
+# print(Solution()._jump_tanxin([2,3,1,1,4]))
 
+    def _jump_tanxin(self, nums: list) -> int:
+        reach, end, count = 0, 0, 0
+        for i in range(len(nums) - 1):
+            if i <= reach:
+                reach = max(reach, nums[i] + i)
+                if i == end:
+                    end =reach
+                    count += 1
 
-print(Solution()._jump_tanxin([7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]))
-print(Solution()._jump_tanxin([2,3,1,1,4]))
+        return count
 
