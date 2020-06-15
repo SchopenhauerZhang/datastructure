@@ -21,5 +21,5 @@ class Solution:
     def  _canWinNim(self, n: int) -> bool:
         return not (n%4 == 0)
 
-    def _canWinNim_eg(self, n: int) -> bool::
+    def _canWinNim_eg(self, n: int) -> bool:
         return n%4 != 0
