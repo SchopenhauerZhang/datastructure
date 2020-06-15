@@ -85,6 +85,36 @@ class Solution:
         
         return True
 
+    def _reverse(self, head: ListNode):
+        if not head or not head.next:
+            return head
+        p, q = head, head.next
+        p.next = None
+        while q:
+            next_ = q.next
+            q.next = p
+            p, q = q, next_
+        return p
+    
+    def _isPalindrome_eg(self, head: ListNode) -> bool:
+        if not head or not head.next:
+            return True
+        
+        p, q = head, head.next
+        while q and q.next and q.next.next:
+            p = p.next
+            q = q.next.next
+            
+        head2 = self._reverse(p.next)
+        p.next = None
+        
+        while head and head2 and head.val == head2.val:
+            head, head2 = head.next, head2.next
+        
+        if head and head2:
+            return False
+        return True
+
 
 
 
