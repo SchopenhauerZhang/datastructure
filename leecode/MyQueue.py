@@ -33,11 +33,12 @@ class MyQueue:
         """
         Push element x to the back of queue.
         """
-        if self.stack_b.empty():
-            data = self.stack_b.pop()
-            while data:
-                self.stack_a.append(data)
+        if len(self.stack_b):
+            
+            while len(self.stack_b):
                 data = self.stack_b.pop()
+                self.stack_a.append(data)
+                
 
         self.stack_a.append(x)
 
@@ -47,15 +48,15 @@ class MyQueue:
         """
         Removes the element from in front of queue and returns that element.
         """
-        if not self.stack_b.empty():
+        if  len(self.stack_b):
             return self.stack_b.pop()
-        if not self.stack_a.empty():
-            data = self.stack_a.pop()
-            while data:
-                self.stack_b.append(data)
+        if  len(self.stack_a):
+            
+            while len(self.stack_a):
                 data = self.stack_a.pop()
-
-        return self.stack_b.pop()
+                self.stack_b.append(data)
+            
+        return self.stack_b.pop() if len(self.stack_b) else False
             
 
 
@@ -65,13 +66,14 @@ class MyQueue:
         """
         Get the front element.
         """
-        if not self.stack_b.empty():
+        if  len(self.stack_b):
             return self.stack_b.pop()
-        if not self.stack_a.empty():
-            data = self.stack_a.pop()
-            while data:
-                self.stack_b.append(data)
+        if  len(self.stack_a):
+        
+            while len(self.stack_a):
                 data = self.stack_a.pop()
+                self.stack_b.append(data)
+                
         data = self.stack_b.pop()
         self.stack_b.append(data)
         return data
@@ -81,7 +83,7 @@ class MyQueue:
         """
         Returns whether the queue is empty.
         """
-        return self.stack_a.empty() and self.stack_b.empty()
+        return  not len(self.stack_a) and not len(self.stack_b)
 
 
 
