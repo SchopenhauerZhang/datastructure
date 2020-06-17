@@ -38,6 +38,7 @@ class Solution:
             return False
         else:
             return self._isSameTree(p.left,q.left) and self._isSameTree(p.right,q.right)
+            
     def _isSameTree_eg(self, parameter_list):
         if p is None and q is None: return True
         if p is not None and q is not None:
