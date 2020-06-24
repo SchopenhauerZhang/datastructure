@@ -67,10 +67,23 @@ class Solution:
             stack.append(nums[i%ol])
         
         return res
-print(Solution()._nextGreaterElements_circle([1,2,1]))
-print(Solution()._nextGreaterElements_circle([1,2,3,4,3]))
+#print(Solution()._nextGreaterElements_circle([1,2,1]))
+#print(Solution()._nextGreaterElements_circle([1,2,3,4,3]))
 
+    def _nextGreaterElements_eg(self, nums : list) -> list:
+        n = len(nums)
+        stack = []
+        res = [-1] * n
+        for i in range(n):
+            while stack and nums[i] > nums[stack[-1]]:
+                res[stack.pop()] = nums[i]
+            stack.append(i)
 
+        for i in range(n):
+            while stack and nums[i] > nums[stack[-1]]:
+                res[stack.pop()] = nums[i]
+
+        return res
 
 
 
