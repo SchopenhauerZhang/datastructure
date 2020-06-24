@@ -40,8 +40,35 @@ class Solution:
             l -= 1
 
         return res
-print(Solution()._nextGreaterElements([1,2,1]))
+#print(Solution()._nextGreaterElements([1,2,1]))
 
+    def _nextGreaterElements_circle(self, nums : list) -> list:
+        # 循环搜索
+        if not nums:
+            return []
+        if len(nums) <= 1:
+            return [-1]
+        if len(nums) <= 2:
+            if nums[0] == nums[1]: return [-1,-1]
+            return  [nums[1],-1] if nums[0] < nums[1] else [-1,nums[0]]
+
+        ol = len(nums)
+        l = (len(nums)-1)
+        stack = list()
+        res = list()
+        for _ in range(l+1):
+            res.append(-1)
+        
+        for i in range(len(nums)*2,0,-1):
+            while stack and stack[len(stack)-1] <= nums[i%ol]:
+                stack.pop()
+            #res.append(stack[len(stack)-1] if stack else -1)
+            res[i%ol] = stack[len(stack)-1] if stack else -1
+            stack.append(nums[i%ol])
+        
+        return res
+print(Solution()._nextGreaterElements_circle([1,2,1]))
+print(Solution()._nextGreaterElements_circle([1,2,3,4,3]))
 
 
 
