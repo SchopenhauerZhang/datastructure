@@ -36,7 +36,7 @@ class Solution:
 
 #print(Solution()._isMatch("aab","c*a*b"))
 
-    def _isMatch_eg(self, s: str, p: str) -> bool:
+    def _isMatch_eg(self, text: str, pattern: str) -> bool:
         memo = {}
         def dp(i, j):
             if (i, j) not in memo:
