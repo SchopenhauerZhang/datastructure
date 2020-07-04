@@ -271,6 +271,10 @@ class Solution:
             profit += sold - buy - fee
         return profit
 
+    def _maxProfit_k(self, prices: list, k: int) -> int:
+        
 
 
 
+
+print(Solution()._maxProfit_k([3,2,6,5,0,3],2))
