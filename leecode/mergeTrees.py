@@ -49,7 +49,8 @@ class Solution:
             return l
 
         return tree(t1,t2)
-    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+
+    def _mergeTrees_eg(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
         # 本题重点是如果某个节点为空, 直接返回另一个节点
         # 递归是人
         if not t1:
