@@ -32,7 +32,7 @@ class Solution:
 
         return self.node 
         
-    def _convertBiNode(self, roots: TreeNode) -> TreeNode:
+    def _convertBiNode(self, root: TreeNode) -> TreeNode:
         
         head=TreeNode(None)
         pre=head
