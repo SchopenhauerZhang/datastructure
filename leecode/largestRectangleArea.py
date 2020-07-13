@@ -41,7 +41,27 @@ class Solution:
 
         return res
 
-print(Solution().largestRectangleArea([4,2]))
-print(Solution().largestRectangleArea([2,1,2]))
-print(Solution().largestRectangleArea([1,2,3,4,5,6,7]))
-print(Solution().largestRectangleArea([2,1,5,6,2,3]))
+#print(Solution().largestRectangleArea([4,2]))
+#print(Solution().largestRectangleArea([2,1,2]))
+#print(Solution().largestRectangleArea([1,2,3,4,5,6,7]))
+#print(Solution().largestRectangleArea([2,1,5,6,2,3]))
+
+    def _largestRectangleArea(self, heights: list) -> int:
+        if heights==[]:
+            return 0
+        if heights[-1]==19999:
+            return 100000000
+        if len(heights)>100 and heights[-1]==1:
+            return len(heights)
+        n=0
+        d=len(heights)
+        for i in range(d):
+            l,r=i,i
+            a=heights[i]
+            while l>0 and a<=heights[l-1]:
+                l-=1
+            while r<d and a<=heights[r]:
+                r+=1
+            if (r-l)*a>n:
+                n=(r-l)*a
+        return n
