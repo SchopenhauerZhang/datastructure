@@ -37,6 +37,7 @@ class Solution:
             r += 1
         print(min_l)
         return s[_sp:_ep+1] if min_l != len(s)+1 else ""
+        
 # https://leetcode-cn.com/problems/minimum-window-substring/submissions/
 print(Solution().minWindow("bbaa",  "aba"))
 print(Solution().minWindow("ADOBECODEBANC",  "ABC"))
