@@ -88,6 +88,45 @@ class Solution:
             return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
         
 
+    def _maxDepth_dq(self, root: TreeNode) -> int:
+        """
+        注意pop(0)！！！！
+        """
+        if not root:
+            return 0
+        q = [root]
+        length = 0
+        while q:
+            _size = len(q)
+            length += 1
+            for _ in range(_size):
+                data = q.pop(0)
+                if data:
+                    if data.left:
+                        q.append(data.left)
+                    if data.right:
+                        q.append(data.right)
+            
+        return length
+    def _maxDepth_dq_eg(self,root):
+        if root == None:
+            return 0
+        stack = [root]
+        i = 0
+        while len(stack) != 0:
+            n = len(stack)
+            i += 1
+            # print(stack)
+            for k in range(n):
+                temp = stack.pop(0)
+                if temp.left:
+                    stack.append(temp.left)
+                if temp.right:
+                    stack.append(temp.right)
+        return i 
+
+
+
 
 
 
