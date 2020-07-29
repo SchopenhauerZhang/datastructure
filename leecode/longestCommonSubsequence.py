@@ -1,5 +1,5 @@
 class Solution:
-    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+    def _longestCommonSubsequence(self, text1: str, text2: str) -> int:
         """
         给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
 
@@ -74,4 +74,3 @@ class Solution:
             else:
                 ans[idx] = num
         return len(ans)
-
