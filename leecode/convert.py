@@ -70,6 +70,9 @@ class Solution:
 #print(Solution().convert('AB',2) == 'AB')
 
     def _convert_eg(self, s: str, numRows: int) -> str:
+        """
+        精彩
+        """
         if numRows <2:
             return s
         grid = ['' for i in range(numRows)]
