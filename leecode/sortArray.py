@@ -21,6 +21,6 @@ class Solution:
         """
          
         return sorted(nums)
-        
+       
 
 print(Solution().sortArray([2,3,5,6]))
