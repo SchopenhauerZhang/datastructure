@@ -46,4 +46,4 @@ class Solution:
             for idx, num in enumerate(row):
                 dp[idx + 1] = min(dp[idx], dp[idx + 1]) + num
         return dp[-1]
-            
+print(Solution()._minPathSum_eg([[1,3,1],[1,5,1],[4,2,1]]))
