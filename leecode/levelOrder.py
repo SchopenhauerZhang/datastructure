@@ -135,3 +135,70 @@ class Solution:
             if node.left:queue.append(node.left)
             if node.right:queue.append(node.right)
         return res
+    
+    def _levelOrder_III(self, root: TreeNode) -> List[List[int]]:
+        """
+            请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+
+ 
+
+            例如:
+            给定二叉树: [3,9,20,null,null,15,7],
+
+                3
+            / \
+            9  20
+                /  \
+            15   7
+            返回其层次遍历结果：
+
+            [
+            [3],
+            [20,9],
+            [15,7]
+            ]
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        if not pRoot:
+            return []
+        queue = [pRoot]
+        ans = []
+        count = 0
+        while queue:
+            temp = []
+            res = []
+            count += 1
+            for i in queue:
+                res.append(i.val)
+                if i.left:
+                    temp.append(i.left)
+                if i.right:
+                    temp.append(i.right)
+            queue = temp
+            if count%2 == 0:
+                res = res[::-1]
+            ans.append(res)
+        return ans
+    
+    def _levelOrder_III_32_eg(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        res,dq = [],collections.deque()
+        dq.append(root)
+        while dq:
+            tmp = collections.deque()
+            for _ in range(len(dq)):
+                node = dq.popleft()
+                if len(res)%2:
+                    tmp.appendleft(node.val)
+                else:
+                    tmp.append(node.val)
+                if node.left:
+                    dq.append(node.left)
+                if node.right:
+                    dq.append(node.right)
+            res.append(list(tmp))
+        return res
