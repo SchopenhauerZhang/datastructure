@@ -96,6 +96,9 @@ class Solution:
         super().__init__()
         self.pre = None
     def _isValidBST_0405_eg(self, root: TreeNode) -> bool:
+        """
+        精彩
+        """
         if not root:
             return True
         if not self.isValidBST(root.left):
