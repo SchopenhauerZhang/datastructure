@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def maxSubArray(self, nums: list) -> int:
         """
@@ -37,7 +38,7 @@ class Solution:
 # print(Solution().maxSubArray([-2,-3,-1]))
 # print(Solution().maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
     
-    def _maxSubArray(self, nums: list) -> int:
+    def _maxSubArray_eg(self, nums: list) -> int:
         temp=nums[0]
         max_=temp
         for i in range(1,len(nums)):
@@ -50,8 +51,47 @@ class Solution:
                 max_=max(max_,temp)
         return max_
 
+    def _maxSubArray_42(self, nums: List[int]) -> int:
+        """
+        输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
 
+        要求时间复杂度为O(n)。
 
+         
+
+        示例1:
+
+        输入: nums = [-2,1,-3,4,-1,2,1,-5,4]
+        输出: 6
+        解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        if not nums or len(nums) <= 2:
+            if len(nums) == 2  :
+                return sum(nums) if nums[0] > 0  and nums[1] > 0 else max(nums[0],nums[1])
+            return nums if len(nums) == 1 else  0
+        res = 0
+
+        for i in nums:
+            if res + i >= res:
+                res = max(res + i,res)
+            else:
+                res = max(res,i)
+
+        return res
+
+    def _maxSubArray_42_eg(self, nums: List[int]) -> int:
+        t = max = -100
+        for i in nums:
+            if t <= 0:
+                t = 0
+            t += i
+            if t > max:
+                max = t
+        return max
 
 
 

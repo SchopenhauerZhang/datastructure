@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def maxSlidingWindow(self, nums: list, k: int) -> list:
         """
@@ -112,6 +113,76 @@ class Solution:
 
             res.append(tmp[-1])
         return res
+    
+    def _maxSlidingWindow_59(self, nums: List[int], k: int) -> List[int]:
+        """
+                给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+
+            示例:
+
+            输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+            输出: [3,3,5,5,6,7] 
+            解释: 
+
+            滑动窗口的位置                最大值
+            ---------------               -----
+            [1  3  -1] -3  5  3  6  7       3
+            1 [3  -1  -3] 5  3  6  7       3
+            1  3 [-1  -3  5] 3  6  7       5
+            1  3  -1 [-3  5  3] 6  7       5
+            1  3  -1  -3 [5  3  6] 7       6
+            1  3  -1  -3  5 [3  6  7]      7
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        if not nums or k >= len(nums) or  k == 0 or k == 1:
+            return nums if  not nums or k == 0 or k == 1 else  max(nums)
+        
+        l,r = 0,len(nums)-1
+        tmp = []
+        res = []
+        while l <= r:
+            if len(tmp) <k:
+                tmp.append(nums[l])
+                l += 1
+            elif len(tmp) ==k:
+                res.append(max(tmp))
+                tmp.pop(0)
+
+        if len(tmp) ==k:
+                res.append(max(tmp))
+        return res
+
+    def _maxSlidingWindow_59_eg(self, nums: List[int], k: int) -> List[int]:
+        if nums==[]:
+            return []
+        if k==0:
+            return
+        res = [0]*(len(nums)-k+1)
+        left,m,right=0,0,k-1
+        for i in range(k):
+            if nums[i]>=nums[m]:
+                m=i
+        res[0] = nums[m]
+        for i in range(1,len(nums)-k+1):
+            left+=1
+            right+=1
+            if nums[right]>=nums[m]:
+                m=right
+            if m==left-1:
+                m=left
+                for j in range(left,right+1):
+                    if nums[j]>=nums[m]:
+                        m=j
+            res[i]=nums[m]
+        return res
+            
+
+
+        
+
 
 
 
