@@ -1,3 +1,5 @@
+
+from typing import List
 class Solution:
     def twoSum(self, numbers: list, target: int) -> list:
         """
@@ -51,3 +53,67 @@ class Solution:
             else:
                 j-=1
         return []
+
+    def _twoSum_57(self, nums: List[int], target: int) -> List[int]:
+        """
+            输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
+
+             
+
+            示例 1：
+
+            输入：nums = [2,7,11,15], target = 9
+            输出：[2,7] 或者 [7,2]
+            示例 2：
+
+            输入：nums = [10,26,30,31,47,60], target = 40
+            输出：[10,30] 或者 [30,10]
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        i,r = 0,len(nums)-1
+        while l < r:
+            if target-nums[i] in nums[i+1:]:
+                return [nums[i],target-nums[i]]
+            else:
+                i += 1
+            if target-nums[r] in nums[:r]:
+                return [nums[r],target-nums[r]]
+            else:
+                r -= 1
+        
+    def _twoSum_57_eg(self, nums: List[int], target: int) -> List[int]:
+        i = 0
+        j = len(nums) - 1
+        split_index = (j + i) >> 1
+        
+        while i < j - 1:
+            if nums[j] + nums[i] > target:            
+                if nums[split_index] + nums[i] > target:
+                    j = split_index - 1
+                    split_index = (j + i) >> 1
+                elif nums[split_index] + nums[i] < target:
+                    j -= 1
+                    split_index = (j + split_index) >> 1
+                else:
+                    return [nums[i], nums[split_index]]
+            elif nums[j] + nums[i] < target:   
+                if nums[split_index] + nums[j] < target:
+                    i =  split_index + 1
+                    split_index = (j + i) >> 1   
+                elif nums[split_index] + nums[j] > target:
+                    i += 1
+                    split_index = (i + split_index) >> 1
+                else:
+                    return [nums[j], nums[split_index]]
+            else:
+                return [nums[i], nums[j]]
+
+        if i == j - 1 and nums[j] + nums[i] == target:
+            return [nums[i], nums[j]]
+        else:
+            return []
+
+       
