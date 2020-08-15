@@ -1,10 +1,13 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 class Solution:
     def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
         """"
@@ -42,8 +45,9 @@ class Solution:
         来源：力扣（LeetCode）
         链接：https://leetcode-cn.com/problems/delete-node-in-a-bst
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-        """"
-        pass
+        """
+
+        return TreeNode()
 
     def _deleteNode(self, root: TreeNode, key: int) -> TreeNode:
         def get_m(r):
@@ -116,3 +120,59 @@ class Solution:
             return h
         del(head,node)
             
+    def _deleteNode_18(self, head: ListNode, val: int) -> ListNode:
+        """
+            给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
+
+            返回删除后的链表的头节点。
+
+            注意：此题对比原题有改动
+
+            示例 1:
+
+            输入: head = [4,5,1,9], val = 5
+            输出: [4,1,9]
+            解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+            示例 2:
+
+            输入: head = [4,5,1,9], val = 1
+            输出: [4,5,9]
+            解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        
+        if not head or val is None:
+            return None if not head else head
+        h = head
+        
+        if h.val == val:
+            
+            return h.next
+        
+        pre = h
+        h = h.next
+        
+        while h :
+            if h.val == val:
+                pre.next = h.next
+                
+                break
+            pre = h
+            h = h.next
+        return head
+    
+    def _deleteNode_18_eg(self, head: ListNode, val: int) -> ListNode:
+        if not head: return
+        if head.val == val:
+            return head.next
+        node = head
+        
+        while node.next:
+            if node.next.val == val:
+                node.next = node.next.next
+                break
+            node = node.next
+        return head
