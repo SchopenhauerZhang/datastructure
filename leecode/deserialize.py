@@ -66,6 +66,61 @@ class Codec:
         return data
         
 
+    def _serialize_37(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return []
+        q = [root]
+        res = [root.val]
+        while q:
+            _tmp = []
+            for i in q:
+                if i is None:
+                 
+                    continue
+               
+                if i.left:
+                    _tmp.append(i.left)
+                    res.append(i.left.val)
+                else:
+                    _tmp.append(i.left)
+                    res.append(None)
+
+                if i.right:
+                    _tmp.append(i.right)
+                    res.append(i.right.val)
+                else:
+                    _tmp.append(i.right)
+                    res.append(None)
+            if _tmp:
+                while _tmp :
+                    if _tmp[-1] is None:
+                        _tmp.pop()
+                    else:
+                        break
+                q = _tmp
+            else:
+                q = []
+       
+        while res:
+            if res[-1] is None:
+                res.pop()
+            else:
+                break
+        return self.deserialize(res)
+
+    def _deserialize_37(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        return data
+
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.deserialize(codec.serialize(root))
