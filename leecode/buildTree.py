@@ -69,3 +69,6 @@ class Solution:
             root.right = recur(pre_idx+ (ino_idx-L) + 1, ino_idx+1, R)
             return root 
         return recur(0, 0, len(inorder)-1)
+    
+    def _buildTree_105(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        pass

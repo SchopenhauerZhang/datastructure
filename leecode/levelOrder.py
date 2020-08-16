@@ -202,3 +202,70 @@ class Solution:
                     dq.append(node.right)
             res.append(list(tmp))
         return res
+    
+    def _levelOrder_102(self, root: TreeNode) -> List[List[int]]:
+        """
+            给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+             
+
+            示例：
+            二叉树：[3,9,20,null,null,15,7],
+
+                3
+            / \
+            9  20
+                /  \
+            15   7
+            返回其层次遍历结果：
+
+            [
+            [3],
+            [9,20],
+            [15,7]
+            ]
+            通过次数178,532
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        res = []
+        if not root or (not root.left and not root.right): 
+            return [] if not root else [[root.val]]
+        q = [root]
+        while q:
+            _tmp = []
+            _q = []
+            for i in q:
+                _tmp.append(i.val)
+                if i.left:
+                    _q.append(i.left)
+                
+                if i.right:
+                    _q.append(i.right)
+            if _q:
+                q = _q
+            else :
+                q = []
+            if _tmp:
+                res.append(_tmp)
+        return res
+    
+    def _levelOrder_102_eg(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        res=[]
+        cur_lev=[root]
+        while cur_lev:
+            nex_lev=[]
+            tmp=[]
+            for cur in cur_lev:
+                tmp.append(cur.val)
+                if cur.left:
+                    nex_lev.append(cur.left)
+                if cur.right:
+                    nex_lev.append(cur.right)
+            res.append(tmp)
+            cur_lev=nex_lev
+        return res
