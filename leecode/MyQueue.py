@@ -48,34 +48,30 @@ class MyQueue:
         """
         Removes the element from in front of queue and returns that element.
         """
-        if  len(self.stack_b):
-            return self.stack_b.pop()
+        
         if  len(self.stack_a):
             
             while len(self.stack_a):
                 data = self.stack_a.pop()
                 self.stack_b.append(data)
-            
-        return self.stack_b.pop() if len(self.stack_b) else False
-            
-
-
-
+        if  len(self.stack_b):
+            return self.stack_b.pop()
 
     def peek(self) -> int:
         """
         Get the front element.
         """
-        if  len(self.stack_b):
-            return self.stack_b.pop()
+        
         if  len(self.stack_a):
         
             while len(self.stack_a):
                 data = self.stack_a.pop()
                 self.stack_b.append(data)
-                
-        data = self.stack_b.pop()
+        data = self.stack_b.pop(len(self.stack_b)-1)
         self.stack_b.append(data)
+        while  len(self.stack_b):
+            self.stack_a.append(self.stack_b.pop())
+        
         return data
 
 
@@ -86,6 +82,45 @@ class MyQueue:
         return  not len(self.stack_a) and not len(self.stack_b)
 
 
+    ###########________eg_______###############
+    def __init__(self):
+        self.queue_stack = []
+
+
+    def push(self, x: int) -> None:
+
+        #就是把数放在栈底就好了！
+        tmp = []
+        while self.queue_stack.__len__() > 0 :
+            tmp.append(self.queue_stack.pop())
+
+        self.queue_stack.append(x)
+
+        while tmp.__len__() > 0:
+            self.queue_stack.append(tmp.pop())
+        
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        return self.queue_stack.pop()
+
+
+    def peek(self) -> int:
+        return self.queue_stack[-1]
+        """
+        Get the front element.
+        """
+
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        if self.queue_stack.__len__() == 0:
+            return True
+        return False
 
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
