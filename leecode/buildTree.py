@@ -71,4 +71,32 @@ class Solution:
         return recur(0, 0, len(inorder)-1)
     
     def _buildTree_105(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        pass
+        if not preorder or  not inorder or len(preorder) == 1:
+            return TreeNode(preorder[0])  if preorder else None
+        
+        def build(prepos,l,r):
+            root = TreeNode(preorder[prepos])
+            # 左右子树定位
+            right = inorder.index(preorder[prepos])
+
+            root.left = build(prepos+1,l,right-1)
+            root.right = build(prepos+right-l+1,right+1,r)
+        
+        return build(0,0,len(preorder)-1)
+    
+    def _buildTree_105_eg(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def createTree(preorder_left,preorder_right,inorder_left,inorder_right):
+            if preorder_left > preorder_right:
+                return None
+            preorder_root = preorder_left
+            inorder_root = index[preorder[preorder_root]]
+            root = TreeNode(preorder[preorder_root])
+            size_left_subtree = inorder_root -inorder_left
+            root.left = createTree(preorder_left + 1, preorder_left + size_left_subtree,inorder_left,inorder_root -1)
+            root.right = createTree(preorder_left + size_left_subtree +1, preorder_right, inorder_root + 1, inorder_right)
+            return root 
+        
+
+        n = len(preorder)
+        index = {element: i for i,element in enumerate(inorder)}
+        return createTree(0,n-1,0,n-1)
