@@ -124,3 +124,34 @@ class Solution:
         
         
         return root
+
+    def _lowestCommonAncestor_236(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root or p.val == root.val or q.val == root.val:
+            return root 
+        
+        def find(r,p,q):
+            if not r:
+                return None
+            elif r.val == p.val or r.val == q.val:
+                return r
+            l = find(r.left,p,q)
+            rr = find(r.right,p,q)
+            if not l and rr:
+                return rr
+            elif not rr and l:
+                return l
+            return None if l is  None and rr is  None else r
+        return find(root,p,q)
+
+    def _lowestCommonAncestor_236_better(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root or root==p or root==q:
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if not left and not right:
+            return
+        elif not left:
+            return right
+        elif not right:
+            return left
+        return root
