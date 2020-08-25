@@ -59,3 +59,4 @@ class Solution:
             else :
                 ans+='0'
         return int(ans,2)
+        
