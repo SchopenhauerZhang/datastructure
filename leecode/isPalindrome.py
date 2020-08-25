@@ -57,3 +57,41 @@ class Solution:
         if strs.upper()==strs1.upper():
             return True
         return False
+    
+    def _isPalindrome_206(self, head: ListNode) -> bool:
+        if not head or not head.next:
+            return  True
+        res = []
+        while head:
+            res.append(head.val)
+            head = head.next
+        return res == res[::-1]
+    
+    def _isPalindrome_206_eg(self, head: ListNode) -> bool:
+        head_origin=head
+        fast=head 
+        slow=head 
+
+        while fast and fast.next:
+             slow=slow.next 
+             fast=fast.next.next
+           
+        slow_head=slow 
+        p=None
+        
+        while slow_head:
+            q=slow_head.next     
+            slow_head.next=p 
+            p=slow_head 
+            slow_head=q 
+
+        while p:
+            if head_origin.val==p.val:
+                head_origin=head_origin.next 
+                p=p.next 
+            else:
+                return False 
+        return True  
+
+
+            
