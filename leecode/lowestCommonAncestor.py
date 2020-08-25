@@ -155,3 +155,53 @@ class Solution:
         elif not right:
             return left
         return root
+    
+    def _lowestCommonAncestor_0408(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        print(p)
+        if not root or q is None or p is None:
+            if q and p is None:
+                return q
+            return p if q is None and p else None
+        def get(r,p,q):
+            if r == q or r == p:
+                return r
+            else:
+                if not r:
+                    return 
+                else:
+                    _l = get(r.left,p,q)
+                    _r = get(r.right,p,q)
+                    if not _l and not _r:
+                        return 
+                    else:
+                        if _l and _r:
+                            return r
+                        return _l if _l else _r
+        return get(root,p,q) 
+    
+    def _lowestCommonAncestor_0408_eg(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        
+        self.res = None
+        def help(node):
+
+            if not node:
+                return
+            
+            left = help(node.left)
+            right = help(node.right)
+
+            if ((left == q or left == p) and (right == q or right == p) or (node == q or node == p)):
+                self.res = node
+
+            if left == p or left == q:
+                return left
+            
+            if right == p or right == q:
+                return right
+            
+            return node
+        
+        help(root)
+        return self.res
