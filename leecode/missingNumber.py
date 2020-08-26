@@ -55,4 +55,31 @@ class Solution:
             actual=actual+nums[i]
         output=int(total-actual)
         return output
-        
+
+    def missingNumber_268(self, nums: List[int]) -> int:
+        """
+            给定一个包含 0, 1, 2, ..., n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。
+
+             
+
+            示例 1:
+
+            输入: [3,0,1]
+            输出: 2
+            示例 2:
+
+            输入: [9,6,4,2,3,5,7,0,1]
+            输出: 8
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/missing-number
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        """
+        n = len(nums)
+        return int(n*(n+1)/2-sum(nums))
+    
+    def missingNumber_268_eg(self, nums: List[int]) -> int:
+        nums_total = sum(nums)
+        length = len(nums)
+        total = (length * (length+1)) // 2
+        return total - nums_total
