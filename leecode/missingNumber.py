@@ -34,7 +34,25 @@ class Solution:
                     return i                      
         return i+1
 
-print(Solution().missingNumber([0,1,2,3,4,5,6,7,9]))
-print(Solution().missingNumber([0,1,2,3,4,5,6,7,8,9,10,11,13]))
-print(Solution().missingNumber([0,1,2]))
+# print(Solution().missingNumber([0,1,2,3,4,5,6,7,9]))
+# print(Solution().missingNumber([0,1,2,3,4,5,6,7,8,9,10,11,13]))
+# print(Solution().missingNumber([0,1,2]))
 
+    def missingNumber_1704(self, nums: List[int]) -> int:
+        if not nums or len(nums) == 1:
+            return 0 if (nums and nums[0]!= 0) or not nums else 1
+        i = 0
+        while True:
+            if i not in nums:
+                return i
+            else:
+                i += 1
+        
+    def missingNumber_1704(self, nums: List[int]) -> int:
+        total=(0+len(nums))*(len(nums)+1)/2
+        actual=0
+        for i in range(len(nums)):
+            actual=actual+nums[i]
+        output=int(total-actual)
+        return output
+        
