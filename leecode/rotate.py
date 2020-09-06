@@ -187,3 +187,83 @@ class Solution:
         reverse(nums, n-k, n-1)
         nums.reverse()
         return
+    
+    def _rotate_48(self, matrix: List[List[int]]) -> None:
+        """
+            给定一个 n × n 的二维矩阵表示一个图像。
+
+            将图像顺时针旋转 90 度。
+
+            说明：
+
+            你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。
+
+            示例 1:
+
+            给定 matrix = 
+            [
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+            ],
+
+            原地旋转输入矩阵，使其变为:
+            [
+            [7,4,1],
+            [8,5,2],
+            [9,6,3]
+            ]
+            示例 2:
+
+            给定 matrix =
+            [
+            [ 5, 1, 9,11],
+            [ 2, 4, 8,10],
+            [13, 3, 6, 7],
+            [15,14,12,16]
+            ], 
+
+            原地旋转输入矩阵，使其变为:
+            [
+            [15,13, 2, 5],
+            [14, 3, 4, 1],
+            [12, 6, 8, 9],
+            [16, 7,10,11]
+            ]
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode-cn.com/problems/rotate-image
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        Do not return anything, modify matrix in-place instead.
+        
+        """
+        
+        if len(matrix[0]) > 1:
+            pass
+        matrix[:] = zip(*matrix[::-1])
+    
+    def _rotate_48_eg(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        cur_row = 0
+        n = len(matrix[0])
+        # leng = n - 1
+
+        while cur_row < n:
+            for indx1 in range(cur_row, (n-1)):
+                # cur_col = indx1
+                cur_pixel = matrix[cur_row][indx1]
+                for _ in [0,1,2,3]:
+                    new_row = indx1
+                    # new_col = leng - cur_row
+                    new_col = len(matrix[0]) - 1 - cur_row
+                    next_pixel = matrix[new_row][new_col]
+                    matrix[new_row][new_col] = cur_pixel
+                    
+                    cur_pixel = next_pixel
+                    cur_row = new_row
+                    indx1 = new_col
+            
+            cur_row += 1
+            n -= 1
