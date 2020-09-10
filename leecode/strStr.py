@@ -27,4 +27,36 @@ class Solution:
                 return i
             i += 1
         return -1
+    def strStr_kmp(self, haystack: str, needle: str) -> int:
+        def kmp(ls,s):
+            _next = get_next(s)
+            print(_next)
+            l,r = 0,0
+            ll = len(ls)
+            while r < ll and l < len(s):
+                if l == -1 or ls[r] == s[l]:
+                    r += 1
+                    l += 1
+                else:
+                    l = _next[l]
+            
+            if l == len(s):
+                return r -l
+            else:
+                return -1
 
+
+        def get_next(short):
+            res = [0]*(len(short)+1)
+            res[0] = -1
+            slow,i = -1,0
+            ll = len(short)
+            while i < ll:
+                if slow == -1 or short[i] == short[slow] :
+                    i += 1
+                    slow += 1
+                    res[i] = slow
+                else:
+                    slow = res[slow] 
+            return res
+        return kmp(haystack,needle)
