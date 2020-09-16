@@ -93,6 +93,24 @@ class Solution:
                 max = t
         return max
 
+    def _maxSubArray__max_sub_array(self, nums: List[int]) -> int:
+        """
+            最大连续子数组
+        """
+        i,s,e,res,_sub,max = 0,0,0,[],0,float('-inf')
+        while i < len(nums):
+            if _sub <= 0:
+                _sub = 0 
+                s = 0
+            _sub += nums[i]
+            if _sub > max:
+                e = i
+                res = nums[s:e+1]
+                max = _sub 
+        return res
+
+
+
 
 
 
