@@ -1,0 +1,13 @@
+curl 'http://zjt.st.zakww.com/gxslExam/api.do?pa=examinee.question.next&pv=ajax' \
+  -H 'Connection: keep-alive' \
+  -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36' \
+  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'Origin: http://zjt.st.zakww.com' \
+  -H 'Referer: http://zjt.st.zakww.com/gxslExam/api.do?pa=examinee.question.forward&userId=o1eidf7bdt33.v5iUh4bd8Nl0OtqqBON&subjectId=o1cuvfjsf587zSpiKK4Bf8qJ9wpOf1FA' \
+  -H 'Accept-Language: zh,en;q=0.9,zh-CN;q=0.8,ja;q=0.7' \
+  -H 'Cookie: JSESSIONID=6C0C71FDAC43A2FA03D6956730A315C9' \
+  --data-raw 'userId=o1eidf7bdt33.v5iUh4bd8Nl0OtqqBON&subjectId=o1cuvfjsf587zSpiKK4Bf8qJ9wpOf1FA' \
+  --compressed \
+  --insecure
