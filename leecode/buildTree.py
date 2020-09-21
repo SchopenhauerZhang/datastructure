@@ -100,3 +100,26 @@ class Solution:
         n = len(preorder)
         index = {element: i for i,element in enumerate(inorder)}
         return createTree(0,n-1,0,n-1)
+    
+    def buildTree_106(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        if not inorder or not postorder:
+            return TreeNode()
+        
+        def tree(l,r,postorders):
+            if l >= r:
+                return None
+            root = TreeNode(postorder[-1])
+            pos = inorder.index(root.val)
+            
+            # left节点在postorder中的位置
+            if pos >= 1 and postorders[l,postorders.index(inorder[pos-1])+1]:
+                root.left = tree(root,l,postorders.index(inorder[pos-1])+1,postorders[l,postorders.index(inorder[pos-1])+1])
+
+            if pos < ll-1 and postorders[postorders.index(inorder[pos+1]),r]:
+                root.right = tree(root,postorders.index(inorder[pos+1]),r,postorders[postorders.index(inorder[pos+1]),r])
+            return root
+        ll = len(postorder)
+        
+        return tree(0,ll-1,postorder)
+    
+
